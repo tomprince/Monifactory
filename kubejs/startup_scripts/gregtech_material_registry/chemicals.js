@@ -180,5 +180,12 @@ GTCEuStartupEvents.materialModification(() => {
     GTMaterials.get('cyanoacetic_acid').setFormula('C3H3NO2')
     GTMaterials.get('ethyl_cyanoacetate').setFormula('C5H7NO2')
     GTMaterials.get('ethyl_cyanoacrylate').setFormula('C6H7NO2')
-    GTMaterials.get('polyethyl_cyanoacrylate').setFormula('C6H7NO2')
+    GTMaterials.get('polyethyl_cyanoacrylate').setFormula('C6H7NO2');
+
+    [
+        'cyanoacetic_acid',
+    ].map(mat => GTMaterials.get(mat)).forEach(mat => {
+        TagPrefix.dustTiny.setIgnored(mat);
+        TagPrefix.dustSmall.setIgnored(mat);
+    });
 })

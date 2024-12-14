@@ -161,4 +161,27 @@ GTCEuStartupEvents.materialModification(() => {
     GTMaterials.get('rhodium_nitrate').setFormula('Rh(NO3)3');
     GTMaterials.get('ammonium_hexachloroiridiate').setFormula('(NH4)2IrCl6');
     GTMaterials.get('rhodium_salt').setFormula('(NaCl)2(RhCl3)2');
+    [
+        'iridium_dioxide_residue',
+        'platinum_metallic',
+        'palladium_metallic',
+        'ammonium_hexachloroplatinate',
+        'potassium_bisulfate',
+        'potassium_pyrosulfate',
+        'zinc_sulfate',
+        'sodium_nitrate',
+        'rhodium_nitrate',
+        'sodium_ruthenate',
+        'sodium_peroxide',
+        'platinum_group_residue',
+        'crude_platinum_residue',
+        'crude_palladium_residue',
+        'iridium_group_sludge',
+        'crude_rhodium_residue',
+        'rhodium_salt',
+        'sodium_methoxide',
+    ].map(mat => GTMaterials.get(mat)).forEach(mat => {
+        TagPrefix.dustTiny.setIgnored(mat);
+        TagPrefix.dustSmall.setIgnored(mat);
+    });
 })
