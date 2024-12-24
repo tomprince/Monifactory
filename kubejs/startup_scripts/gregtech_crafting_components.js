@@ -1,17 +1,14 @@
-const Map = Java.loadClass("java.util.Map");
-
 GTCEuStartupEvents.craftingComponents(event => {
 
     //Make LuV+ electrolyzer wires not osmium for funsies :)
-    let wireElectricMap = {};
-    event.modify(CraftingComponent.WIRE_ELECTRIC, Map.of(
-        GTValues.LuV, UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.VanadiumGallium),
-        GTValues.ZPM, UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.NaquadahAlloy),
-        GTValues.UV, UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.get('sculk_superconductor')),
-        GTValues.UHV, UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.get('activated_netherite')),
-        GTValues.UEV, UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.Holmium),
-        GTValues.UIV, UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.get('monium')),
-    ));
+    event.modify(CraftingComponent.WIRE_ELECTRIC, {
+        LuV: UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.VanadiumGallium),
+        ZPM: UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.NaquadahAlloy),
+        UV: UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.get('sculk_superconductor')),
+        UHV: UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.get('activated_netherite')),
+        UEV: UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.Holmium),
+        UIV: UnificationEntry(TagPrefix.wireGtSingle, GTMaterials.get('monium')),
+    });
 
     //Omnium & Holmium for wires/cables
     let wireCableComponentPrefixes = [
@@ -26,10 +23,10 @@ GTCEuStartupEvents.craftingComponents(event => {
     ]
 
     wireCableComponentPrefixes.forEach(prefixComponentPair => {
-        event.modify(prefixComponentPair[2], Map.of(
-            GTValues.UEV, UnificationEntry(prefixComponentPair[0], GTMaterials.get('omnium')),
-            GTValues.UIV, UnificationEntry(prefixComponentPair[1], GTMaterials.Holmium),
-        ));
+        event.modify(prefixComponentPair[2], {
+            UEV: UnificationEntry(prefixComponentPair[0], GTMaterials.get('omnium')),
+            UIV: UnificationEntry(prefixComponentPair[1], GTMaterials.Holmium),
+        });
     });
 
     //Netherite, Holmium, and Monium for tier up wires/cables
@@ -43,11 +40,11 @@ GTCEuStartupEvents.craftingComponents(event => {
     ]
 
     wireCableTierUpComponentPrefixes.forEach(prefixComponentPair => {
-        event.modify(prefixComponentPair[1], Map.of(
-            GTValues.UHV, UnificationEntry(prefixComponentPair[0], GTMaterials.get('activated_netherite')),
-            GTValues.UEV, UnificationEntry(prefixComponentPair[0], GTMaterials.Holmium),
-            GTValues.UIV, UnificationEntry(prefixComponentPair[0], GTMaterials.get('monium')),
-        ));
+        event.modify(prefixComponentPair[1], {
+            UHV: UnificationEntry(prefixComponentPair[0], GTMaterials.get('activated_netherite')),
+            UEV: UnificationEntry(prefixComponentPair[0], GTMaterials.Holmium),
+            UIV: UnificationEntry(prefixComponentPair[0], GTMaterials.get('monium')),
+        });
     });
 
     // Pipes
@@ -58,40 +55,40 @@ GTCEuStartupEvents.craftingComponents(event => {
     ]
 
     pipeComponentPrefixes.forEach(prefixComponentPair => {
-        event.modify(prefixComponentPair[1], Map.of(
-            GTValues.UHV, UnificationEntry(prefixComponentPair[0], GTMaterials.Neutronium),
-            GTValues.UEV, UnificationEntry(prefixComponentPair[0], GTMaterials.get('activated_netherite')),
-            GTValues.UIV, UnificationEntry(prefixComponentPair[0], GTMaterials.Holmium),
-        ));
+        event.modify(prefixComponentPair[1], {
+            UHV: UnificationEntry(prefixComponentPair[0], GTMaterials.Neutronium),
+            UEV: UnificationEntry(prefixComponentPair[0], GTMaterials.get('activated_netherite')),
+            UIV: UnificationEntry(prefixComponentPair[0], GTMaterials.Holmium),
+        });
     });
 
     // Glass
-    event.modify(CraftingComponent.GLASS, Map.of(
-        GTValues.UHV, Item.of('gtceu:fusion_glass'),
-        GTValues.UEV, Item.of('gtceu:fusion_glass'),
-        GTValues.UIV, Item.of('gtceu:fusion_glass'),
-    ));
+    event.modify(CraftingComponent.GLASS, {
+        UHV: Item.of('gtceu:fusion_glass'),
+        UEV: Item.of('gtceu:fusion_glass'),
+        UIV: Item.of('gtceu:fusion_glass'),
+    });
 
     // Plates
-    event.modifyUnificationEntry(CraftingComponent.PLATE, Map.of(
-        GTValues.UEV, UnificationEntry(TagPrefix.plate, GTMaterials.get('omnium')),
-        GTValues.UIV, UnificationEntry(TagPrefix.plate, GTMaterials.get('infinity')),
-        GTValues.MAX, UnificationEntry(TagPrefix.plate, GTMaterials.get('holmium')),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.PLATE, {
+        UEV: UnificationEntry(TagPrefix.plate, GTMaterials.get('omnium')),
+        UIV: UnificationEntry(TagPrefix.plate, GTMaterials.get('infinity')),
+        MAX: UnificationEntry(TagPrefix.plate, GTMaterials.get('holmium')),
+    });
 
     // Hull plates
-    event.modifyUnificationEntry(CraftingComponent.HULL_PLATE, Map.of(
-        GTValues.UEV, UnificationEntry(TagPrefix.plate, GTMaterials.get('polyethyl_cyanoacrylate')),
-        GTValues.UIV, UnificationEntry(TagPrefix.plate, GTMaterials.get('polyethyl_cyanoacrylate')),
-        GTValues.MAX, UnificationEntry(TagPrefix.plate, GTMaterials.get('polyethyl_cyanoacrylate')),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.HULL_PLATE, {
+        UEV: UnificationEntry(TagPrefix.plate, GTMaterials.get('polyethyl_cyanoacrylate')),
+        UIV: UnificationEntry(TagPrefix.plate, GTMaterials.get('polyethyl_cyanoacrylate')),
+        MAX: UnificationEntry(TagPrefix.plate, GTMaterials.get('polyethyl_cyanoacrylate')),
+    });
 
     // Rotors
-    event.modifyUnificationEntry(CraftingComponent.ROTOR, Map.of(
-        GTValues.UHV, UnificationEntry(TagPrefix.rotor, GTMaterials.Neutronium),
-        GTValues.UEV, UnificationEntry(TagPrefix.rotor, GTMaterials.get('activated_netherite')),
-        GTValues.UIV, UnificationEntry(TagPrefix.rotor, GTMaterials.Holmium),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.ROTOR, {
+        UHV: UnificationEntry(TagPrefix.rotor, GTMaterials.Neutronium),
+        UEV: UnificationEntry(TagPrefix.rotor, GTMaterials.get('activated_netherite')),
+        UIV: UnificationEntry(TagPrefix.rotor, GTMaterials.Holmium),
+    });
 
     // TODO: Sawblades (May require making tools for the material)
 
@@ -102,70 +99,69 @@ GTCEuStartupEvents.craftingComponents(event => {
     ]
 
     heatingCoilComponentPrefixes.forEach(prefixComponentPair => {
-        event.modify(prefixComponentPair[1], Map.of(
-            GTValues.UHV, UnificationEntry(prefixComponentPair[0], GTMaterials.get('omnium')),
-            GTValues.UEV, UnificationEntry(prefixComponentPair[0], GTMaterials.get('omnium')),
-            GTValues.UIV, UnificationEntry(prefixComponentPair[0], GTMaterials.get('omnium')),
-        ));
+        event.modify(prefixComponentPair[1], {
+            UHV: UnificationEntry(prefixComponentPair[0], GTMaterials.get('omnium')),
+            UEV: UnificationEntry(prefixComponentPair[0], GTMaterials.get('omnium')),
+            UIV: UnificationEntry(prefixComponentPair[0], GTMaterials.get('omnium')),
+        });
     });
 
     // Electric Coils
-    event.modifyUnificationEntry(CraftingComponent.COIL_ELECTRIC, Map.of(
-        GTValues.UHV, UnificationEntry(TagPrefix.wireGtHex, GTMaterials.get('sculk_superconductor')),
-        GTValues.UEV, UnificationEntry(TagPrefix.wireGtHex, GTMaterials.get('activated_netherite')),
-        GTValues.UIV, UnificationEntry(TagPrefix.wireGtHex, GTMaterials.get('holmium')),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.COIL_ELECTRIC, {
+        UHV: UnificationEntry(TagPrefix.wireGtHex, GTMaterials.get('sculk_superconductor')),
+        UEV: UnificationEntry(TagPrefix.wireGtHex, GTMaterials.get('activated_netherite')),
+        UIV: UnificationEntry(TagPrefix.wireGtHex, GTMaterials.get('holmium')),
+    });
 
     // Magnetic Rods
-    event.modifyUnificationEntry(CraftingComponent.STICK_MAGNETIC, Map.of(
-        GTValues.UV, UnificationEntry(TagPrefix.rodLong, GTMaterials.SamariumMagnetic),
-        GTValues.UHV, UnificationEntry(TagPrefix.rodLong, GTMaterials.get('magnetic_terbium')),
-        GTValues.UEV, UnificationEntry(TagPrefix.rodLong, GTMaterials.get('magnetic_terbium')),
-        GTValues.UIV, UnificationEntry(TagPrefix.rodLong, GTMaterials.get('magnetic_terbium')),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.STICK_MAGNETIC, {
+        UV: UnificationEntry(TagPrefix.rodLong, GTMaterials.SamariumMagnetic),
+        UHV: UnificationEntry(TagPrefix.rodLong, GTMaterials.get('magnetic_terbium')),
+        UEV: UnificationEntry(TagPrefix.rodLong, GTMaterials.get('magnetic_terbium')),
+        UIV: UnificationEntry(TagPrefix.rodLong, GTMaterials.get('magnetic_terbium')),
+    });
 
     // Distillation Rods
-    event.modifyUnificationEntry(CraftingComponent.STICK_DISTILLATION, Map.of(
-        GTValues.UHV, UnificationEntry(TagPrefix.spring, GTMaterials.Actinium),
-        GTValues.UEV, UnificationEntry(TagPrefix.spring, GTMaterials.get('sculk_bioalloy')),
-        GTValues.UIV, UnificationEntry(TagPrefix.spring, GTMaterials.get('eltz')),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.STICK_DISTILLATION, {
+        UHV: UnificationEntry(TagPrefix.spring, GTMaterials.Actinium),
+        UEV: UnificationEntry(TagPrefix.spring, GTMaterials.get('sculk_bioalloy')),
+        UIV: UnificationEntry(TagPrefix.spring, GTMaterials.get('eltz')),
+    });
 
     // Electromagnetic Rods
-    event.modifyUnificationEntry(CraftingComponent.STICK_ELECTROMAGNETIC, Map.of(
-        GTValues.IV, UnificationEntry(TagPrefix.rod, GTMaterials.Neodymium),
-        GTValues.LuV, UnificationEntry(TagPrefix.rod, GTMaterials.Samarium),
-        GTValues.ZPM, UnificationEntry(TagPrefix.rod, GTMaterials.Samarium),
-        GTValues.UV, UnificationEntry(TagPrefix.rod, GTMaterials.Samarium),
-        GTValues.UHV, UnificationEntry(TagPrefix.rod, GTMaterials.Terbium),
-        GTValues.UEV, UnificationEntry(TagPrefix.rod, GTMaterials.Terbium),
-        GTValues.UIV, UnificationEntry(TagPrefix.rod, GTMaterials.Terbium),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.STICK_ELECTROMAGNETIC, {
+        IV: UnificationEntry(TagPrefix.rod, GTMaterials.Neodymium),
+        LuV: UnificationEntry(TagPrefix.rod, GTMaterials.Samarium),
+        ZPM: UnificationEntry(TagPrefix.rod, GTMaterials.Samarium),
+        UV: UnificationEntry(TagPrefix.rod, GTMaterials.Samarium),
+        UHV: UnificationEntry(TagPrefix.rod, GTMaterials.Terbium),
+        UEV: UnificationEntry(TagPrefix.rod, GTMaterials.Terbium),
+        UIV: UnificationEntry(TagPrefix.rod, GTMaterials.Terbium),
+    });
 
     // Chem reactor pipe ingredient
-    event.modifyUnificationEntry(CraftingComponent.PIPE_REACTOR, Map.of(
-        GTValues.UHV, UnificationEntry(TagPrefix.pipeNormalFluid, GTMaterials.Polybenzimidazole),
-        GTValues.UEV, UnificationEntry(TagPrefix.pipeLargeFluid, GTMaterials.Polybenzimidazole),
-        GTValues.UIV, UnificationEntry(TagPrefix.pipeLargeFluid, GTMaterials.Polybenzimidazole),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.PIPE_REACTOR, {
+        UHV: UnificationEntry(TagPrefix.pipeNormalFluid, GTMaterials.Polybenzimidazole),
+        UEV: UnificationEntry(TagPrefix.pipeLargeFluid, GTMaterials.Polybenzimidazole),
+        UIV: UnificationEntry(TagPrefix.pipeLargeFluid, GTMaterials.Polybenzimidazole),
+    });
 
     // PIC ingredient
-    event.modifyItem(CraftingComponent.POWER_COMPONENT, Map.of(
-        GTValues.UEV, Item.of('kubejs:uxpic_chip'),
-        GTValues.UIV, Item.of('kubejs:uxpic_chip'),
-    ));
+    event.modifyItem(CraftingComponent.POWER_COMPONENT, {
+        UEV: Item.of('kubejs:uxpic_chip'),
+        UIV: Item.of('kubejs:uxpic_chip'),
+    });
 
     // Spring
-    let springMap = {};
-    event.modifyUnificationEntry(CraftingComponent.SPRING, Map.of(
-        GTValues.UEV, UnificationEntry(TagPrefix.spring, GTMaterials.get('activated_netherite')),
-        GTValues.UIV, UnificationEntry(TagPrefix.spring, GTMaterials.get('holmium')),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.SPRING, {
+        UEV: UnificationEntry(TagPrefix.spring, GTMaterials.get('activated_netherite')),
+        UIV: UnificationEntry(TagPrefix.spring, GTMaterials.get('holmium')),
+    });
 
     // Frame
-    event.modifyUnificationEntry(CraftingComponent.FRAME, Map.of(
-        GTValues.UHV, UnificationEntry(TagPrefix.frameGt, GTMaterials.Neutronium),
-        GTValues.UEV, UnificationEntry(TagPrefix.frameGt, GTMaterials.get('omnium')),
-        GTValues.UIV, UnificationEntry(TagPrefix.frameGt, GTMaterials.get('infinity')),
-    ));
+    event.modifyUnificationEntry(CraftingComponent.FRAME, {
+        UHV: UnificationEntry(TagPrefix.frameGt, GTMaterials.Neutronium),
+        UEV: UnificationEntry(TagPrefix.frameGt, GTMaterials.get('omnium')),
+        UIV: UnificationEntry(TagPrefix.frameGt, GTMaterials.get('infinity')),
+    });
 });
